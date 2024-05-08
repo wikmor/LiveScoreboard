@@ -38,4 +38,19 @@ class ScoreboardTest {
         assertEquals("A team cannot play a match against itself.", exception.getMessage());
     }
 
+    @Test
+    void addMatch_shouldReturnError_whenSameCountryWithDifferentCapitalizationAddedToScoreboard() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        String homeTeam = "Mexico";
+        String awayTeam = "MEXICO";
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.addMatch(homeTeam, awayTeam);
+        });
+        assertEquals("A team cannot play a match against itself.", exception.getMessage());
+    }
+
 }

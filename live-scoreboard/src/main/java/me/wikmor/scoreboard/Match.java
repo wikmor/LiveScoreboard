@@ -8,7 +8,7 @@ public class Match {
     private int awayScore;
 
     public Match(String homeTeam, String awayTeam) {
-        if (homeTeam.equalsIgnoreCase(awayTeam)) {
+        if (homeTeam.equalsIgnoreCase(awayTeam)) { // TODO check non-standard characters or spacing?
             throw new IllegalArgumentException("A team cannot play a match against itself.");
         }
 
