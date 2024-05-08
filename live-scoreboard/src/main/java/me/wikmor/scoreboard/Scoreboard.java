@@ -11,6 +11,10 @@ public class Scoreboard {
         matches.add(new Match(home, away));
     }
 
+    public void updateMatchScore(String home, String away, int homeScore, int awayScore) {
+
+    }
+
     public List<Match> getMatches() {
         return new ArrayList<>(matches);
     }

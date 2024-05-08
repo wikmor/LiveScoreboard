@@ -53,4 +53,19 @@ class ScoreboardTest {
         assertEquals("A team cannot play a match against itself.", exception.getMessage());
     }
 
+    @Test
+    void updateMatchScore_shouldReturnUpdatedScoreboard_whenScoreChanged() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Home", "Away");
+
+        // When
+        scoreboard.updateMatchScore("Home", "Away", 1, 0);
+
+        // Then
+        Match match = scoreboard.getMatches().get(0);
+        assertEquals(1, match.getHomeTeamScore());
+        assertEquals(0, match.getAwayTeamScore());
+    }
+
 }

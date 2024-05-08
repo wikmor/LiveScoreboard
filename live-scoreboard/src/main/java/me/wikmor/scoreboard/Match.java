@@ -4,8 +4,8 @@ public class Match {
 
     private final String homeTeam;
     private final String awayTeam;
-    private int homeScore;
-    private int awayScore;
+    private int homeTeamScore;
+    private int awayTeamScore;
 
     public Match(String homeTeam, String awayTeam) {
         if (homeTeam.equalsIgnoreCase(awayTeam)) { // TODO check non-standard characters or spacing?
@@ -14,8 +14,8 @@ public class Match {
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.homeScore = 0;
-        this.awayScore = 0;
+        this.homeTeamScore = 0;
+        this.awayTeamScore = 0;
     }
 
     public String getHomeTeam() {
@@ -24,5 +24,13 @@ public class Match {
 
     public String getAwayTeam() {
         return awayTeam;
+    }
+
+    public int getHomeTeamScore() {
+        return homeTeamScore;
+    }
+
+    public int getAwayTeamScore() {
+        return awayTeamScore;
     }
 }
