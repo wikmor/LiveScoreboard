@@ -8,6 +8,10 @@ public class Match {
     private int awayScore;
 
     public Match(String homeTeam, String awayTeam) {
+        if (homeTeam.equalsIgnoreCase(awayTeam)) {
+            throw new IllegalArgumentException("A team cannot play a match against itself.");
+        }
+
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
