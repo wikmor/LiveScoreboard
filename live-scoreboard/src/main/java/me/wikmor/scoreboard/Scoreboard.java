@@ -12,7 +12,13 @@ public class Scoreboard {
     }
 
     public void updateMatchScore(String home, String away, int homeScore, int awayScore) {
-
+        for (Match match : matches) {
+            if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
+                match.setHomeTeamScore(homeScore);
+                match.setAwayTeamScore(awayScore);
+                break;
+            }
+        }
     }
 
     public List<Match> getMatches() {
