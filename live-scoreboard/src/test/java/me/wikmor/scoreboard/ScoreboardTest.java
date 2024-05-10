@@ -29,7 +29,7 @@ class ScoreboardTest {
     }
 
     @Test
-    void addMatch_shouldReturnError_whenSameCountryAddedToScoreboard() {
+    void addMatch_shouldReturnError_whenHomeTeamEqualsAwayTeam() {
         // Given
         Scoreboard scoreboard = new Scoreboard();
         String homeTeam = "Mexico";
@@ -44,7 +44,7 @@ class ScoreboardTest {
     }
 
     @Test
-    void addMatch_shouldReturnError_whenSameCountryWithDifferentCapitalizationAddedToScoreboard() {
+    void addMatch_shouldReturnError_whenHomeTeamEqualsIgnoreCaseAwayTeam() {
         // Given
         Scoreboard scoreboard = new Scoreboard();
         String homeTeam = "Mexico";
@@ -56,6 +56,17 @@ class ScoreboardTest {
             scoreboard.addMatch(homeTeam, awayTeam);
         });
         assertEquals("A team cannot play a match against itself.", exception.getMessage());
+    }
+
+    @Test
+    void addMatch_shouldReturnError_whenHomeTeamIsAlreadyPlayingAgainstAnotherTeam() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Mexico", "Canada");
+
+        // When
+        // Then
+        assertThrows(Exception.class, () -> scoreboard.addMatch("Mexico", "Spain"));
     }
 
     @Test

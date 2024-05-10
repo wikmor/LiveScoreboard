@@ -11,7 +11,7 @@ public class Match {
     public Match(String homeTeam, String awayTeam) {
         if (homeTeam.equalsIgnoreCase(awayTeam)) { // TODO check non-standard characters or spacing?
             throw new IllegalArgumentException("A team cannot play a match against itself.");
-        }
+        } // TODO Move to Scoreboard, because need to check if one team isn't already playing with someone else
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;

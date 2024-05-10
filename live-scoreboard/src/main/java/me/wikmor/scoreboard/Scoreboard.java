@@ -14,7 +14,7 @@ public class Scoreboard {
         matches.add(new Match(home, away));
     }
 
-    public void updateMatchScore(String home, String away, int homeScore, int awayScore) {
+    public void updateMatchScore(String home, String away, int homeScore, int awayScore) { // TODO Updating by one goal would be more realistic?
         for (Match match : matches) {
             if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
                 match.setHomeTeamScore(homeScore);
