@@ -1,7 +1,6 @@
 package me.wikmor.scoreboard;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
@@ -26,13 +25,7 @@ public class Scoreboard {
     }
 
     public void finishMatch(String home, String away) {
-        Iterator<Match> it = matches.iterator();
-        while (it.hasNext()) {
-            Match match = it.next();
-            if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
-                it.remove();
-            }
-        }
+        matches.removeIf(match -> match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away));
     }
 
     public List<Match> getSummary() {
