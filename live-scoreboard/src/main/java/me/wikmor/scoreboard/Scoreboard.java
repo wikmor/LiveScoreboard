@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.reverseOrder;
+
 public class Scoreboard {
 
     private final List<Match> matches = new ArrayList<>();
@@ -32,8 +35,14 @@ public class Scoreboard {
         }
     }
 
+    public List<Match> getSummary() {
+        return matches.stream()
+                .sorted(comparing(Match::getTotalScore, reverseOrder())
+                        .thenComparing(Match::getStartTime, reverseOrder()))
+                .toList();
+    }
+
     public List<Match> getMatches() {
         return new ArrayList<>(matches);
     }
-
 }

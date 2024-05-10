@@ -2,6 +2,8 @@ package me.wikmor.scoreboard;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreboardTest {
@@ -96,4 +98,41 @@ class ScoreboardTest {
         assertEquals("Spain", scoreboard.getMatches().get(0).getHomeTeam());
         assertEquals("Brazil", scoreboard.getMatches().get(0).getAwayTeam());
     }
+
+    @Test
+    void getSummary_shouldReturnOrderedScoreboard_whenCalled() throws InterruptedException {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Mexico", "Canada");
+        Thread.sleep(100);
+        scoreboard.addMatch("Spain", "Brazil");
+        Thread.sleep(100);
+        scoreboard.addMatch("Germany", "France");
+        Thread.sleep(100);
+        scoreboard.addMatch("Uruguay", "Italy");
+        Thread.sleep(100);
+        scoreboard.addMatch("Argentina", "Australia");
+
+        scoreboard.updateMatchScore("Mexico", "Canada", 0, 5);
+        scoreboard.updateMatchScore("Spain", "Brazil", 10, 2);
+        scoreboard.updateMatchScore("Germany", "France", 2, 2);
+        scoreboard.updateMatchScore("Uruguay", "Italy", 6, 6);
+        scoreboard.updateMatchScore("Argentina", "Australia", 3, 1);
+
+        // When
+        List<Match> actualMatches = scoreboard.getSummary();
+
+        // Then
+        assertEquals(actualMatches.get(0).getHomeTeam(), "Uruguay");
+        assertEquals(actualMatches.get(0).getAwayTeam(), "Italy");
+        assertEquals(actualMatches.get(1).getHomeTeam(), "Spain");
+        assertEquals(actualMatches.get(1).getAwayTeam(), "Brazil");
+        assertEquals(actualMatches.get(2).getHomeTeam(), "Mexico");
+        assertEquals(actualMatches.get(2).getAwayTeam(), "Canada");
+        assertEquals(actualMatches.get(3).getHomeTeam(), "Argentina");
+        assertEquals(actualMatches.get(3).getAwayTeam(), "Australia");
+        assertEquals(actualMatches.get(4).getHomeTeam(), "Germany");
+        assertEquals(actualMatches.get(4).getAwayTeam(), "France");
+    }
+
 }

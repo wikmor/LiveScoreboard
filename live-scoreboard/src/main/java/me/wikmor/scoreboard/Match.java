@@ -4,6 +4,7 @@ public class Match {
 
     private final String homeTeam;
     private final String awayTeam;
+    private final long startTime;
     private int homeTeamScore;
     private int awayTeamScore;
 
@@ -14,6 +15,7 @@ public class Match {
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.startTime = System.currentTimeMillis();
         this.homeTeamScore = 0;
         this.awayTeamScore = 0;
     }
@@ -24,6 +26,14 @@ public class Match {
 
     public String getAwayTeam() {
         return awayTeam;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public int getTotalScore() {
+        return homeTeamScore + awayTeamScore;
     }
 
     public int getHomeTeamScore() {
