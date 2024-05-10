@@ -68,4 +68,32 @@ class ScoreboardTest {
         assertEquals(0, match.getAwayTeamScore());
     }
 
+    @Test
+    void finishMatch_shouldReturnEmptyScoreboard_whenAllMatchesRemovedFromScoreboard() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Home", "Away");
+
+        // When
+        scoreboard.finishMatch("Home", "Away");
+
+        // Then
+        assertTrue(scoreboard.getMatches().isEmpty());
+    }
+
+    @Test
+    void finishMatch_shouldReturnOneMatch_whenOneMatchRemovedFromScoreboard() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Mexico", "Canada");
+        scoreboard.addMatch("Spain", "Brazil");
+
+        // When
+        scoreboard.finishMatch("Mexico", "Canada");
+
+        // Then
+        assertEquals(1, scoreboard.getMatches().size());
+        assertEquals("Spain", scoreboard.getMatches().get(0).getHomeTeam());
+        assertEquals("Brazil", scoreboard.getMatches().get(0).getAwayTeam());
+    }
 }
