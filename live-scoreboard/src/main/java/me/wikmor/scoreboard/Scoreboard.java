@@ -35,7 +35,7 @@ public class Scoreboard {
                 .toList();
     }
 
-    public List<Match> getMatches() {
+    List<Match> getMatches() {
         return new ArrayList<>(matches);
     }
 }
