@@ -12,6 +12,9 @@ public class Scoreboard {
 
     public void addMatch(String home, String away) {
         for (Match match : matches) {
+            if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
+                throw new IllegalArgumentException("You cannot add a match that already exists.");
+            }
             if (match.getHomeTeam().equals(home) || match.getAwayTeam().equals(away)) {
                 throw new IllegalArgumentException("Home or away team is already playing against another team.");
             }

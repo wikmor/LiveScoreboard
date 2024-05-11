@@ -73,6 +73,20 @@ class ScoreboardTest {
     }
 
     @Test
+    void addMatch_shouldReturnError_whenSpecifiedMatchAlreadyExists() {
+        // Given
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.addMatch("Mexico", "Canada");
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.addMatch("Mexico", "Canada");
+        });
+        assertEquals("You cannot add a match that already exists.", exception.getMessage());
+    }
+
+    @Test
     void updateMatchScore_shouldReturnUpdatedScoreboard_whenScoreChanged() {
         // Given
         Scoreboard scoreboard = new Scoreboard();
