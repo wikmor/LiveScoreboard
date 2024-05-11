@@ -11,6 +11,11 @@ public class Scoreboard {
     private final List<Match> matches = new ArrayList<>();
 
     public void addMatch(String home, String away) {
+        for (Match match : matches) {
+            if (match.getHomeTeam().equals(home) || match.getAwayTeam().equals(away)) {
+                throw new IllegalArgumentException("Home or away team is already playing against another team.");
+            }
+        }
         matches.add(new Match(home, away));
     }
 

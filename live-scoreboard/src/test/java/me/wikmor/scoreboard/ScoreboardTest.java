@@ -66,7 +66,10 @@ class ScoreboardTest {
 
         // When
         // Then
-        assertThrows(Exception.class, () -> scoreboard.addMatch("Mexico", "Spain"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.addMatch("Mexico", "Spain");
+        });
+        assertEquals("Home or away team is already playing against another team.", exception.getMessage());
     }
 
     @Test
