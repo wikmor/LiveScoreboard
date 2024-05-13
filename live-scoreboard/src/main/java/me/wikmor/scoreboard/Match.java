@@ -2,7 +2,7 @@ package me.wikmor.scoreboard;
 
 public class Match {
 
-    private final String homeTeam; // TODO Change String to Team/Country enum?
+    private final String homeTeam; // TODO Change String to Team/Country enum? Prevent blank names?
     private final String awayTeam;
     private final long startTime;
     private int homeTeamScore;
@@ -41,6 +41,9 @@ public class Match {
     }
 
     public void setHomeTeamScore(int homeTeamScore) {
+        if (homeTeamScore < 0) {
+            throw new IllegalArgumentException("The home team score cannot be a negative number.");
+        }
         this.homeTeamScore = homeTeamScore;
     }
 

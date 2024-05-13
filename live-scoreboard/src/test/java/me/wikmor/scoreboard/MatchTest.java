@@ -34,4 +34,18 @@ class MatchTest {
         });
         assertEquals("A team cannot play a match against itself.", exception.getMessage());
     }
+
+    @Test
+    void setHomeTeamScore_shouldReturnError_whenNegativeScoreProvided() {
+        // Given
+        int negativeScore = -1;
+        Match match = new Match("Mexico", "Canada");
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            match.setHomeTeamScore(negativeScore);
+        });
+        assertEquals("The home team score cannot be a negative number.", exception.getMessage());
+    }
 }
