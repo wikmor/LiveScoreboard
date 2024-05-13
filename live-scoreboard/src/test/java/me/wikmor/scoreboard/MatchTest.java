@@ -36,6 +36,34 @@ class MatchTest {
     }
 
     @Test
+    void constructor_shouldReturnError_whenHomeTeamIsBlank() {
+        // Given
+        String homeTeam = "";
+        String awayTeam = "Mexico";
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Match(homeTeam, awayTeam);
+        });
+        assertEquals("The home team name cannot be empty.", exception.getMessage());
+    }
+
+    @Test
+    void constructor_shouldReturnError_whenAwayTeamIsBlank() {
+        // Given
+        String homeTeam = "Mexico";
+        String awayTeam = "";
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Match(homeTeam, awayTeam);
+        });
+        assertEquals("The away team name cannot be empty.", exception.getMessage());
+    }
+
+    @Test
     void setHomeTeamScore_shouldReturnError_whenNegativeScoreProvided() {
         // Given
         int negativeScore = -1;

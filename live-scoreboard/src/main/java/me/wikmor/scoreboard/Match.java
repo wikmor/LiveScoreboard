@@ -13,6 +13,14 @@ public class Match {
             throw new IllegalArgumentException("A team cannot play a match against itself.");
         }
 
+        if (homeTeam.isEmpty()) {
+            throw new IllegalArgumentException("The home team name cannot be empty.");
+        }
+
+        if (awayTeam.isEmpty()) {
+            throw new IllegalArgumentException("The away team name cannot be empty.");
+        }
+
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.startTime = System.currentTimeMillis();
