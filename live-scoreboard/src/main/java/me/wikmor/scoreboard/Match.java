@@ -52,6 +52,9 @@ public class Match {
     }
 
     public void setAwayTeamScore(int awayTeamScore) {
+        if (awayTeamScore < 0) {
+            throw new IllegalArgumentException("The away team score cannot be a negative number.");
+        }
         this.awayTeamScore = awayTeamScore;
     }
 }

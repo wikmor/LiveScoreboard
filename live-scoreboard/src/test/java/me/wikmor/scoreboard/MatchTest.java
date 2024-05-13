@@ -48,4 +48,18 @@ class MatchTest {
         });
         assertEquals("The home team score cannot be a negative number.", exception.getMessage());
     }
+
+    @Test
+    void setAwayTeamScore_shouldReturnError_whenNegativeScoreProvided() {
+        // Given
+        int negativeScore = -1;
+        Match match = new Match("Mexico", "Canada");
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            match.setAwayTeamScore(negativeScore);
+        });
+        assertEquals("The away team score cannot be a negative number.", exception.getMessage());
+    }
 }
