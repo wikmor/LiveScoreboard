@@ -18,13 +18,14 @@ This project is a simple library that implements a Live Football World Cup Score
 ```
 
 ### In your Java project main directory:
+Create e.g. libs folder:
 ```bash
 mkdir libs
 ```
-Take ``live-scoreboard-1.0.0.jar`` from ``build/libs`` in library project to the ``/libs`` folder in your project.
+Put ``live-scoreboard-1.0.0.jar`` from ``build/libs`` in library project to the ``/libs`` folder in your project.
 
 Add to ``build.gradle``:
-```
+```gradle
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
@@ -63,5 +64,10 @@ scoreboard.getSummary().forEach(match ->
 ```
 
 ## Assumptions:
+- This library is intended for simplicity
 - Decreasing the match score is permissible, for example, if a goal is initially deemed valid but is later confirmed not to be a goal after VAR verification.
+- Each match is uniquely identified by its home and away teams.
 - Similar to removing an item from a list in Java, we don't throw an exception when finishing a match that doesn't exist.
+- While exceptions are thrown and caught in the test cases, there is no custom exception handling. In the future, creating custom exceptions to provide more specific error messages can be beneficial.
+- The current library implementation is not thread-safe. Concurrent modifications to the scoreboard by multiple threads can lead to an inconsistent state. Therefore, it is not advisable to use this library in a multithreaded environment without proper synchronization mechanisms.
+- Logging functionality is not included in the library. In a production environment, implementing logging would be crucial for monitoring and troubleshooting the application.
