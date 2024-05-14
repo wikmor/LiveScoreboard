@@ -10,8 +10,8 @@ class MatchTest {
     @Test
     void constructor_shouldReturnError_whenHomeTeamEqualsAwayTeam() {
         // Given
-        String homeTeam = "Mexico";
-        String awayTeam = "Mexico";
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam = new Team("Mexico");
 
         // When
         // Then
@@ -24,8 +24,8 @@ class MatchTest {
     @Test
     void constructor_shouldReturnError_whenHomeTeamEqualsIgnoreCaseAwayTeam() {
         // Given
-        String homeTeam = "Mexico";
-        String awayTeam = "MEXICO";
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam = new Team("MEXICO");
 
         // When
         // Then
@@ -33,61 +33,5 @@ class MatchTest {
             new Match(homeTeam, awayTeam);
         });
         assertEquals("A team cannot play a match against itself.", exception.getMessage());
-    }
-
-    @Test
-    void constructor_shouldReturnError_whenHomeTeamIsBlank() {
-        // Given
-        String homeTeam = "";
-        String awayTeam = "Mexico";
-
-        // When
-        // Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Match(homeTeam, awayTeam);
-        });
-        assertEquals("The home team name cannot be empty.", exception.getMessage());
-    }
-
-    @Test
-    void constructor_shouldReturnError_whenAwayTeamIsBlank() {
-        // Given
-        String homeTeam = "Mexico";
-        String awayTeam = "";
-
-        // When
-        // Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Match(homeTeam, awayTeam);
-        });
-        assertEquals("The away team name cannot be empty.", exception.getMessage());
-    }
-
-    @Test
-    void setHomeTeamScore_shouldReturnError_whenNegativeScoreProvided() {
-        // Given
-        int negativeScore = -1;
-        Match match = new Match("Mexico", "Canada");
-
-        // When
-        // Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            match.setHomeTeamScore(negativeScore);
-        });
-        assertEquals("The home team score cannot be a negative number.", exception.getMessage());
-    }
-
-    @Test
-    void setAwayTeamScore_shouldReturnError_whenNegativeScoreProvided() {
-        // Given
-        int negativeScore = -1;
-        Match match = new Match("Mexico", "Canada");
-
-        // When
-        // Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            match.setAwayTeamScore(negativeScore);
-        });
-        assertEquals("The away team score cannot be a negative number.", exception.getMessage());
     }
 }

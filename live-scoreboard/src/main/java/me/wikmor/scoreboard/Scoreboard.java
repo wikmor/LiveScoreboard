@@ -10,29 +10,33 @@ public class Scoreboard {
 
     private final List<Match> matches = new ArrayList<>();
 
-    public void addMatch(String home, String away) {
+    public void addMatch(Team home, Team away) {
         for (Match match : matches) {
             if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
                 throw new IllegalArgumentException("You cannot add a match that already exists.");
             }
-            if (match.getHomeTeam().equals(home) || match.getAwayTeam().equals(away)) {
-                throw new IllegalArgumentException("Home or away team is already playing against another team.");
+            if (match.getHomeTeam().equals(home)) {
+                throw new IllegalArgumentException("Home team is already playing against another team.");
+            }
+            if (match.getAwayTeam().equals(away)) {
+                throw new IllegalArgumentException("Away team is already playing against another team.");
             }
         }
         matches.add(new Match(home, away));
     }
 
-    public void updateMatchScore(String home, String away, int homeScore, int awayScore) { // TODO Updating by one goal would be more realistic?
+    // TODO Error when match doesn't exist?
+    public void updateScore(Team home, Team away, int homeScore, int awayScore) { // TODO Updating by one goal would be more realistic?
         for (Match match : matches) {
             if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
-                match.setHomeTeamScore(homeScore);
-                match.setAwayTeamScore(awayScore);
+                match.getHomeTeam().setScore(homeScore);
+                match.getAwayTeam().setScore(awayScore);
                 break;
             }
         }
     }
 
-    public void finishMatch(String home, String away) {
+    public void finishMatch(Team home, Team away) {
         matches.removeIf(match -> match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away));
     }
 

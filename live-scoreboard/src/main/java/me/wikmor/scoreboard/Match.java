@@ -2,37 +2,25 @@ package me.wikmor.scoreboard;
 
 public class Match {
 
-    private final String homeTeam; // TODO Change String to Team/Country enum? Prevent blank names?
-    private final String awayTeam;
+    private final Team homeTeam;
+    private final Team awayTeam;
     private final long startTime;
-    private int homeTeamScore;
-    private int awayTeamScore;
 
-    public Match(String homeTeam, String awayTeam) {
-        if (homeTeam.equalsIgnoreCase(awayTeam)) { // TODO check non-standard characters or spacing?
+    public Match(Team homeTeam, Team awayTeam) {
+        if (homeTeam.getName().equalsIgnoreCase(awayTeam.getName())) {
             throw new IllegalArgumentException("A team cannot play a match against itself.");
-        }
-
-        if (homeTeam.isEmpty()) {
-            throw new IllegalArgumentException("The home team name cannot be empty.");
-        }
-
-        if (awayTeam.isEmpty()) {
-            throw new IllegalArgumentException("The away team name cannot be empty.");
         }
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.startTime = System.currentTimeMillis();
-        this.homeTeamScore = 0;
-        this.awayTeamScore = 0;
     }
 
-    public String getHomeTeam() {
+    public Team getHomeTeam() {
         return homeTeam;
     }
 
-    public String getAwayTeam() {
+    public Team getAwayTeam() {
         return awayTeam;
     }
 
@@ -41,28 +29,13 @@ public class Match {
     }
 
     public int getTotalScore() {
-        return homeTeamScore + awayTeamScore;
+        return homeTeam.getScore() + awayTeam.getScore();
     }
 
-    public int getHomeTeamScore() {
-        return homeTeamScore;
-    }
-
-    public void setHomeTeamScore(int homeTeamScore) {
-        if (homeTeamScore < 0) {
-            throw new IllegalArgumentException("The home team score cannot be a negative number.");
-        }
-        this.homeTeamScore = homeTeamScore;
-    }
-
-    public int getAwayTeamScore() {
-        return awayTeamScore;
-    }
-
-    public void setAwayTeamScore(int awayTeamScore) {
-        if (awayTeamScore < 0) {
-            throw new IllegalArgumentException("The away team score cannot be a negative number.");
-        }
-        this.awayTeamScore = awayTeamScore;
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Match
+                && ((Match) obj).getHomeTeam().equals(homeTeam)
+                && ((Match) obj).getAwayTeam().equals(awayTeam);
     }
 }
