@@ -6,8 +6,7 @@ public class Team {
     private int score;
 
     public Team(String name) {
-        // TODO also check null?
-        if (name.isBlank()) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("The team name cannot be blank.");
         }
 

@@ -33,7 +33,18 @@ class TeamTest {
         assertEquals("The team name cannot be blank.", exception.getMessage());
     }
 
-    // TODO Check for team name is null
+    @Test
+    void constructor_shouldReturnError_whenTeamNameIsNull() {
+        // Given
+        String name = null;
+
+        // When
+        // Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Team(name);
+        });
+        assertEquals("The team name cannot be blank.", exception.getMessage());
+    }
 
     @Test
     void setScore_shouldReturnError_whenNegativeScoreProvided() {
