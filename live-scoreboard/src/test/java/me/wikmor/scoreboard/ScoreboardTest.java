@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +66,7 @@ class ScoreboardTest {
     }
 
     @Test
-    void updateMatchScore_shouldReturnUpdatedScoreboard_whenScoreChanged() {
+    void updateScore_shouldReturnUpdatedScoreboard_whenScoreChanged() {
         // Given
         Team homeTeam = new Team("Mexico");
         Team awayTeam = new Team("Canada");
@@ -78,6 +79,20 @@ class ScoreboardTest {
         Match match = scoreboard.getMatches().get(0);
         assertEquals(1, match.getHomeTeam().getScore());
         assertEquals(0, match.getAwayTeam().getScore());
+    }
+
+    @Test
+    void updateScore_shouldReturnError_whenMatchDoesntExist() {
+        // Given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam = new Team("Canada");
+
+        // When
+        // Then
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
+            scoreboard.updateScore(homeTeam, awayTeam, 1, 0);
+        });
+        assertEquals("Match between Mexico and Canada not found.", exception.getMessage());
     }
 
     @Test

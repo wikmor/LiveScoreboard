@@ -2,6 +2,7 @@ package me.wikmor.scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
@@ -25,14 +26,18 @@ public class Scoreboard {
         matches.add(new Match(home, away));
     }
 
-    // TODO Error when match doesn't exist?
-    public void updateScore(Team home, Team away, int homeScore, int awayScore) { // TODO Updating by one goal would be more realistic?
+    public void updateScore(Team home, Team away, int homeScore, int awayScore) {
+        boolean updated = false;
         for (Match match : matches) {
             if (match.getHomeTeam().equals(home) && match.getAwayTeam().equals(away)) {
                 match.getHomeTeam().setScore(homeScore);
                 match.getAwayTeam().setScore(awayScore);
+                updated = true;
                 break;
             }
+        }
+        if (!updated) {
+            throw new NoSuchElementException("Match between " + home.getName() + " and " + away.getName() + " not found.");
         }
     }
 
